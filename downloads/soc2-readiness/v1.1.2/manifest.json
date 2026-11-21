@@ -1,0 +1,29 @@
+{
+  "version": "1.1.2",
+  "dataset": "soc2-readiness",
+  "subject": "A self-assessment of a one-person platform against the AICPA Trust Services Criteria: 23 controls, each graded for design and for operation.",
+  "tier": "public",
+  "published": "2026-11-20",
+  "license": "CC-BY-4.0",
+  "doi": null,
+  "canonical": "https://jakelawrence.xyz/research/soc2-readiness",
+  "counts": {
+    "controls": 23,
+    "slipped": 8
+  },
+  "files": [
+    "controls.json",
+    "controls.csv",
+    "worksheet.md",
+    "CITATION.cff",
+    "README.md"
+  ],
+  "citation": "Lawrence, J. (2026). SOC 2 Readiness for a One-Person Platform (version 1.1.2) [Data set]. https://jakelawrence.xyz/research/soc2-readiness. CC BY 4.0.",
+  "sha256": {
+    "controls.json": "12e38d26dc49a45cb2ccd335c59dbb3305b5ec9da87291b35bc46a3bde785933",
+    "controls.csv": "844a70eec56eb963cca3047a6ac9a2c8e734acd15c86f2b480e8d460387d4896",
+    "worksheet.md": "c79537500278a1ecf606d4d53628a3da0f70490ad1a9c934007f8b0f998f3164",
+    "CITATION.cff": "94034b354d216dd04d948736fc9d5e62a198519e6384ab01b7c253f018714bdf",
+    "README.md": "ffc6093bb6d90c2b0fea643bd64b247db9941c01f2a82a29289188ed28f7ee48"
+  }
+}
