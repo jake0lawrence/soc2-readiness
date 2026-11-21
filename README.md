@@ -45,7 +45,12 @@ checks every file of every version against its `SHA256SUMS` and `manifest.json`,
 
 ## Cite
 
-**No DOI has been minted yet.** [CITATION.cff](CITATION.cff) has no `doi` field for that reason, and nothing here invents one. Until one exists, cite the version and its permanent link on the site (below). This repository is regenerated from the site, so the DOI will appear here, in the README and in `CITATION.cff`, once it is minted.
+Archived on Zenodo with a DOI:
+
+- **All versions** (always the newest): [https://doi.org/10.5281/zenodo.24427334](https://doi.org/10.5281/zenodo.24427334)
+- **1.1.3:** [https://doi.org/10.5281/zenodo.24427335](https://doi.org/10.5281/zenodo.24427335)
+
+Cite the version you used by its own DOI.
 
 Version 1.1.3, as the release gives it:
 
