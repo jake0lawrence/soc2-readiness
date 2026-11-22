@@ -16,6 +16,10 @@ A SOC 2 readiness self-assessment of a one-person web platform against the AICPA
 
 Each version is frozen when it is published: its files on the website (`/downloads/soc2-readiness/v<version>/`) never change, and a frozen page shows it at `/research/soc2-readiness/v/<version>`. A regrade is a new version, with a changelog entry, and a new version DOI under this record's concept DOI.
 
+## Read with
+
+*Policy as Code, Graded Twice*, a methods preprint by the same author, describes how this self-assessment and the policy template published beside it are kept true to a running system, and what replaying their checks against the site's own history caught and missed. DOI [10.5281/zenodo.24430329](https://doi.org/10.5281/zenodo.24430329), which always resolves to the newest version of the paper.
+
 ## What it is not
 
 Not an audit and not a SOC 2 report. Only an independent CPA firm can issue a SOC 2 report, and this platform has not engaged one. Nothing in this record claims compliance.
