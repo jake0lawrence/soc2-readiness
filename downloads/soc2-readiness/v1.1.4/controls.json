@@ -1,0 +1,1378 @@
+{
+  "dataset": "soc2-readiness",
+  "version": "1.1.4",
+  "as_of": "2026-11-20",
+  "published": "2026-11-21",
+  "license": "CC BY 4.0",
+  "disclaimer": "This is a self-assessment, not an audit. Only an independent CPA firm can issue a SOC 2 report, and this platform has not engaged one. Nothing on this page claims compliance.",
+  "tally": {
+    "design": {
+      "ready": 14,
+      "partial": 7,
+      "gap": 2
+    },
+    "operating": {
+      "ready": 9,
+      "partial": 9,
+      "gap": 5
+    }
+  },
+  "slipped": [
+    "description",
+    "risk",
+    "monitoring",
+    "review",
+    "secrets",
+    "detection",
+    "vendors",
+    "backups"
+  ],
+  "categories": [
+    {
+      "id": "security",
+      "code": "CC",
+      "label": "Security"
+    },
+    {
+      "id": "availability",
+      "code": "A",
+      "label": "Availability"
+    },
+    {
+      "id": "confidentiality",
+      "code": "C",
+      "label": "Confidentiality"
+    },
+    {
+      "id": "integrity",
+      "code": "PI",
+      "label": "Processing integrity"
+    },
+    {
+      "id": "privacy",
+      "code": "P",
+      "label": "Privacy"
+    }
+  ],
+  "crosswalk": {
+    "checked_on": "2026-11-21",
+    "frameworks": [
+      {
+        "id": "nist-csf-2",
+        "name": "NIST Cybersecurity Framework 2.0",
+        "short": "NIST CSF 2.0",
+        "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
+        "note": "Subcategory ids and outcomes read from the Core in NIST CSWP 29.",
+        "outcome_text": "verbatim from NIST",
+        "document": "NIST CSWP 29",
+        "retrieved": "2026-11-21",
+        "source_sha256": "de36759d2f3f70a0f28ab9a95505259e568467923295a13d510a068939773e5a",
+        "license": "Work of the U.S. Government (NIST), not subject to copyright in the United States (17 U.S.C. 105)."
+      },
+      {
+        "id": "cis-v8",
+        "name": "CIS Critical Security Controls v8",
+        "short": "CIS Controls v8",
+        "url": "https://cas8.docs.cisecurity.org/en/latest/",
+        "note": "Safeguard ids and titles read from CIS's Controls Assessment Specification, one page per Control.",
+        "outcome_text": "title only"
+      }
+    ]
+  },
+  "controls": [
+    {
+      "n": 1,
+      "id": "conduct",
+      "ref": "CC1.1",
+      "category": "security",
+      "title": "Written standards, enforced",
+      "asks": "The organization writes down what it expects of the people who run the system and holds them to it.",
+      "how": "A written list of lines the site never crosses is enforced in code: every outbound channel runs the same check before anything is sent, and a test keeps the written list and the code in step.",
+      "design": "ready",
+      "operating": "ready",
+      "gap": "Nobody signs an acknowledgment of the standards.",
+      "solo": "The only person bound by the standards is the person who wrote them, so an acknowledgment would be a signature on one's own memo.",
+      "evidence": [
+        "src/lib/newsletter/send-issue.js#checkRedLines",
+        "src/lib/foia/send.mjs#checkRedLines"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "GV.PO-01",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Policy for managing cybersecurity risks is established based on organizational context, cybersecurity strategy, and priorities and is communicated and enforced",
+            "title_only": false,
+            "why": "Written standards that are communicated and enforced are policy that is established and enforced, here conduct standards enforced in code rather than cybersecurity policy alone.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          }
+        ],
+        "unmapped": [
+          {
+            "framework": "cis-v8",
+            "reason": "CIS Controls v8 has no safeguard on written standards of conduct; its awareness safeguards (Control 14) are about training, not about enforcing a code."
+          }
+        ]
+      }
+    },
+    {
+      "n": 2,
+      "id": "people",
+      "ref": "CC1.3, CC1.4",
+      "category": "security",
+      "title": "Roles, background checks and training",
+      "asks": "Reporting lines and roles are defined, people with access are screened, and everyone takes security training when hired and every year after.",
+      "how": "None of this exists in a form an auditor could test. There is one person: no org chart, no hiring process, no training record.",
+      "design": "gap",
+      "operating": "gap",
+      "gap": "An org chart, a background check, and a dated training record, even for a company of one.",
+      "solo": "An auditor will still test the one person against these criteria. The fix is paperwork rather than code: a written role, a screening record and an annual training certificate.",
+      "evidence": [],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "GV.RR-04",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Cybersecurity is included in human resources practices",
+            "title_only": false,
+            "why": "Roles, screening of people with access, and training at hire are the human resources practices this subcategory names.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.AT-01",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Personnel are provided with awareness and training so that they possess the knowledge and skills to perform general tasks with cybersecurity risks in mind",
+            "title_only": false,
+            "why": "Security training at hire and every year after is awareness and training for personnel.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "GV.RR-02",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Roles, responsibilities, and authorities related to cybersecurity risk management are established, communicated, understood, and enforced",
+            "title_only": false,
+            "why": "Defined reporting lines and roles are the established and communicated roles this subcategory covers, which also asks for authorities and enforcement.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "14.1",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Establish and Maintain a Security Awareness Program",
+            "title_only": true,
+            "why": "An annual training record is evidence of a security awareness program; the criterion also covers roles and screening, which CIS does not address.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls14/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 3,
+      "id": "description",
+      "ref": "CC2.1, CC2.2",
+      "category": "security",
+      "title": "A current description of the system",
+      "asks": "The organization knows and documents what the system is, where its boundaries are, and who can reach what.",
+      "how": "A written threat model names every kind of actor, what each can reach and what bounds it. A public system map shows the parts and how they connect.",
+      "design": "ready",
+      "operating": "partial",
+      "gap": "The threat model was last verified on July 4, 2026. Nothing schedules the next review.",
+      "solo": "",
+      "evidence": [
+        "docs/capabilities/08-security-privacy-resilience.md#Threat model - actors and what they can reach",
+        "docs/capabilities/08-security-privacy-resilience.md#Last verified: 2026-07-04",
+        "src/app/architecture/architecture.mjs#export const GRAPH"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "ID.AM-03",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Representations of the organization's authorized network communication and internal and external network data flows are maintained",
+            "title_only": false,
+            "why": "A system map showing parts and connections is a representation of data flows, though the criterion also covers boundaries and who can reach what.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "ID.AM-02",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Inventories of software, services, and systems managed by the organization are maintained",
+            "title_only": false,
+            "why": "Documenting what the system is covers an inventory of the software, services and systems in it.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "ID.RA-03",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Internal and external threats to the organization are identified and recorded",
+            "title_only": false,
+            "why": "A written threat model naming each kind of actor is a record of internal and external threats.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "16.14",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Conduct Threat Modeling",
+            "title_only": true,
+            "why": "A threat model that names actors, what each can reach and what bounds it is the threat modeling this safeguard asks for.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls16/"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "3.8",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Document Data Flows",
+            "title_only": true,
+            "why": "A system map showing how parts connect documents data flows, though this safeguard is specific to data and the map is not.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls3/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 4,
+      "id": "external",
+      "ref": "CC2.3",
+      "category": "security",
+      "title": "Telling users what is happening",
+      "asks": "Users are told about the system's commitments and about incidents that affect them.",
+      "how": "A public status page reports each component as up, degraded or down, from a health check every three hours, and a privacy page lists what the site stores in a visitor's browser.",
+      "design": "ready",
+      "operating": "ready",
+      "gap": "",
+      "solo": "",
+      "evidence": [
+        "src/lib/agents/status.js#statusModel",
+        ".github/workflows/agent-schedules-tick.yml#Runs EVERY THREE HOURS",
+        "src/app/privacy/page.jsx#Privacy & Cookies"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "GV.OC-04",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Critical objectives, capabilities, and services that external stakeholders depend on or expect from the organization are understood and communicated",
+            "title_only": false,
+            "why": "A status page tells users what the services they depend on are doing, which is communicating those services' state; the subcategory is about the objectives and capabilities themselves.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "RS.CO-02",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Internal and external stakeholders are notified of incidents",
+            "title_only": false,
+            "why": "Telling users about incidents that affect them is notifying external stakeholders of incidents.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "17.6",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Define Mechanisms for Communicating During Incident Response",
+            "title_only": true,
+            "why": "A public status page is one mechanism for communicating during an incident, though this safeguard names internal and external channels generally.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls17/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 5,
+      "id": "risk",
+      "ref": "CC3.1, CC3.2",
+      "category": "security",
+      "title": "A risk assessment that repeats",
+      "asks": "Risks to the system are identified and analyzed, and the assessment is repeated as things change.",
+      "how": "The threat model names its known gaps instead of hiding them, and the one path that merges code without a person has its remaining risk written down and accepted.",
+      "design": "partial",
+      "operating": "gap",
+      "gap": "The assessment was written once. There is no second one to show that it repeats, and no calendar that makes it.",
+      "solo": "",
+      "evidence": [
+        "docs/capabilities/08-security-privacy-resilience.md#Named here as the gap rather than",
+        "docs/capabilities/06-automation-and-ops.md#residual risk"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "ID.RA-05",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritization",
+            "title_only": false,
+            "why": "Identifying and analyzing risks to the system uses threats, vulnerabilities, likelihoods and impacts to prioritize responses.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "GV.RM-06",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "A standardized method for calculating, documenting, categorizing, and prioritizing cybersecurity risks is established and communicated",
+            "title_only": false,
+            "why": "Repeating the assessment as things change needs a standard method to calculate, document and prioritize risk, which the criterion implies.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "16.14",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Conduct Threat Modeling",
+            "title_only": true,
+            "why": "CIS has no enterprise risk assessment safeguard; threat modeling is its nearest application-level analog of identifying and analyzing risk.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls16/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 6,
+      "id": "monitoring",
+      "ref": "CC4.1, CC4.2",
+      "category": "security",
+      "title": "Checking that the controls still work",
+      "asks": "The organization evaluates whether its controls are present and functioning, and acts on what it finds.",
+      "how": "Every scheduled job is listed in a catalog that a test keeps in step with the real schedules, and a dashboard sorts each job into fired, failing or silent.",
+      "design": "ready",
+      "operating": "partial",
+      "gap": "The scheduled jobs were all switched off from July 29 to October 8, 2026 to cut the monthly bill, so the dashboard has a gap in its record for that period. They run again now, but a few stay off on purpose.",
+      "solo": "",
+      "evidence": [
+        "src/lib/burn/model.mjs#classifyJob",
+        "src/lib/burn/__tests__/catalog-drift.test.js#covers every scheduled workflow",
+        "docs/ops/CRON-FREEZE.md#Every scheduled GitHub Actions workflow is paused"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "GV.OV-03",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Organizational cybersecurity risk management performance is evaluated and reviewed for adjustments needed",
+            "title_only": false,
+            "why": "Evaluating whether controls still function and acting on what is found is evaluating and reviewing risk management performance.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "DE.CM-09",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events",
+            "title_only": false,
+            "why": "A dashboard sorting each scheduled job into fired, failing or silent monitors software and runtime for adverse events, a narrower sense of the criterion.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "18.4",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Validate Security Measures",
+            "title_only": true,
+            "why": "Checking that deployed controls still work is validating security measures, though this safeguard sits in a penetration testing Control.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls18/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 7,
+      "id": "tests",
+      "ref": "CC5.2, CC5.3",
+      "category": "security",
+      "title": "Policies deployed as tests",
+      "asks": "Control activities are put in place through technology and through written policies that people follow.",
+      "how": "Policies here are tests that run on every change: the credential inventory, rate-limit coverage, the boundary around client records, the lines the site never crosses. The build fails if any one of them breaks.",
+      "design": "ready",
+      "operating": "ready",
+      "gap": "",
+      "solo": "",
+      "evidence": [
+        ".github/workflows/ci.yml#npm test",
+        "src/lib/secrets/__tests__/inventory.audit.test.js#NO STRAYS",
+        "scripts/audit/rate-limit-coverage.mjs#classifyRoute"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.PS-06",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Secure software development practices are integrated, and their performance is monitored throughout the software development life cycle",
+            "title_only": false,
+            "why": "Policies deployed as tests on every change are secure development practices integrated into the software life cycle.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "GV.PO-01",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Policy for managing cybersecurity risks is established based on organizational context, cybersecurity strategy, and priorities and is communicated and enforced",
+            "title_only": false,
+            "why": "A test that fails the build when a policy breaks is how that policy is enforced, not only communicated.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "16.12",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Implement Code-Level Security Checks",
+            "title_only": true,
+            "why": "Tests on every change that check credentials, route protection and data boundaries are code-level security checks.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls16/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 8,
+      "id": "access",
+      "ref": "CC6.1, CC6.3",
+      "category": "security",
+      "title": "Least-privilege access",
+      "asks": "Access to information and systems is limited to what each person or process needs.",
+      "how": "Access is an ordered ladder: none, view, edit, admin. A member of a shared board sees only that board, and an unknown board and a board you are not on both answer \"not found\". Automated agents act only through tokens scoped to a grant.",
+      "design": "ready",
+      "operating": "ready",
+      "gap": "",
+      "solo": "",
+      "evidence": [
+        "src/lib/access-levels.js#ACCESS_LEVELS",
+        "src/lib/tenancy/gate.mjs#makeTenantGate",
+        "src/lib/iam/act-as.js#isAgentActor"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.AA-05",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Access permissions, entitlements, and authorizations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties",
+            "title_only": false,
+            "why": "An ordered ladder of access levels with scoped tokens is permissions defined by policy and enforced on least privilege.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "6.8",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Define and Maintain Role-Based Access Control",
+            "title_only": true,
+            "why": "Ordered access levels and board-scoped membership are role-based access control defined and maintained.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls6/"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "3.3",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Configure Data Access Control Lists",
+            "title_only": true,
+            "why": "Scoping each shared board to its members is a data access control list, here applied to application records.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls3/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 9,
+      "id": "review",
+      "ref": "CC6.2, CC6.3",
+      "category": "security",
+      "title": "Reviewing who has access",
+      "asks": "Access is granted through a process, removed when it is no longer needed, and reviewed on a schedule.",
+      "how": "Grants are recorded, and every use of an agent's access token is written to an audit log. But nobody reviews the full list of who can reach what on a schedule.",
+      "design": "partial",
+      "operating": "gap",
+      "gap": "A dated, recurring access review with a record of what was removed.",
+      "solo": "The reviewer and the person whose access is being reviewed would be the same person.",
+      "evidence": [
+        "src/lib/iam/act-as.js#iam.actas.used",
+        "src/lib/iam/grants.js#setAgentGrant"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.AA-05",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Access permissions, entitlements, and authorizations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties",
+            "title_only": false,
+            "why": "The criterion's missing piece, a scheduled review of who can reach what, is the reviewed part of this subcategory.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.AA-01",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Identities and credentials for authorized users, services, and hardware are managed by the organization",
+            "title_only": false,
+            "why": "Granting, removing and reviewing access is managing identities and credentials for people, services and hardware.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "6.1",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Establish an Access Granting Process",
+            "title_only": true,
+            "why": "Recording grants is the access granting process this safeguard asks for.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls6/"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "6.2",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Establish an Access Revoking Process",
+            "title_only": true,
+            "why": "Removing access that is no longer needed is the access revoking process this safeguard asks for.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls6/"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "5.3",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Disable Dormant Accounts",
+            "title_only": true,
+            "why": "A scheduled review of who has access is how dormant accounts are found and disabled.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls5/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 10,
+      "id": "secrets",
+      "ref": "CC6.1",
+      "category": "security",
+      "title": "Credentials encrypted and accounted for",
+      "asks": "Credentials that protect the system are themselves protected.",
+      "how": "Stored credentials are encrypted with AES-256-GCM, changed from an admin screen without a redeploy, and every change is logged. A test fails when code uses a credential the ledger has never heard of.",
+      "design": "ready",
+      "operating": "partial",
+      "gap": "Keys are rotated when someone decides to, not on a calendar.",
+      "solo": "",
+      "evidence": [
+        "src/lib/secrets/crypto.mjs#aes-256-gcm",
+        "src/lib/secrets/audit.js#logSecretEvent",
+        "src/lib/secrets/inventory.mjs#TOKEN_SOURCES"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.AA-01",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Identities and credentials for authorized users, services, and hardware are managed by the organization",
+            "title_only": false,
+            "why": "Encrypted stored credentials, rotated from one screen with a change log, are credentials for services managed by the organization.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.DS-01",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "The confidentiality, integrity, and availability of data-at-rest are protected",
+            "title_only": false,
+            "why": "Encrypting stored credentials protects data at rest, for the credential store only.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "3.11",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Encrypt Sensitive Data At Rest",
+            "title_only": true,
+            "why": "Encrypting stored credentials with AES-256-GCM is encrypting sensitive data at rest, for the credential store only.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls3/"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "5.5",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Establish and Maintain an Inventory of Service Accounts",
+            "title_only": true,
+            "why": "A ledger of every outside service the site holds a key for resembles an inventory of service accounts, though the ledger lists credentials rather than accounts.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls5/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 11,
+      "id": "boundary",
+      "ref": "CC6.6",
+      "category": "security",
+      "title": "Protecting the edges",
+      "asks": "The system is protected against threats from outside its boundaries.",
+      "how": "Every route that writes data must be rate-limited, gated behind sign-in, verified by a signature, or listed with a written reason. A test fails on any new route that is none of these. Inbound webhooks are checked with a constant-time comparison.",
+      "design": "ready",
+      "operating": "ready",
+      "gap": "The rate limiter keeps a separate count on each server instance, so a caller spread across instances gets more than the limit. The security doc says so.",
+      "solo": "",
+      "evidence": [
+        "scripts/audit/rate-limit-coverage.mjs#classifyRoute",
+        "src/lib/deploys/signature.mjs#vercelSignatureValid",
+        "src/lib/bearer.js#timingSafeEquals"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.IR-01",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Networks and environments are protected from unauthorized logical access and usage",
+            "title_only": false,
+            "why": "Rate limits, sign-in gates and signature checks protect the system from unauthorized use across its network boundary.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.AA-04",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Identity assertions are protected, conveyed, and verified",
+            "title_only": false,
+            "why": "Verifying inbound webhooks with a constant-time signature comparison is verifying identity assertions.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "16.10",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Apply Secure Design Principles in Application Architectures",
+            "title_only": true,
+            "why": "Requiring every writing route to be gated, rate-limited or signature-verified is a secure design principle applied to the application architecture.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls16/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 12,
+      "id": "transit",
+      "ref": "CC6.7",
+      "category": "security",
+      "title": "Encryption in transit",
+      "asks": "Information moving between the system and its users is protected.",
+      "how": "Every response tells browsers to use HTTPS only, for two years, subdomains included.",
+      "design": "ready",
+      "operating": "ready",
+      "gap": "There is no full Content Security Policy. The config explains why one was not added blind.",
+      "solo": "",
+      "evidence": [
+        "next.config.mjs#Strict-Transport-Security",
+        "next.config.mjs#deliberately NOT added blind"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.DS-02",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "The confidentiality, integrity, and availability of data-in-transit are protected",
+            "title_only": false,
+            "why": "An HTTPS-only response header protects data in transit, as one mechanism rather than a full account of every path.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "3.10",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Encrypt Sensitive Data in Transit",
+            "title_only": true,
+            "why": "An HTTPS-only response header is encrypting sensitive data in transit for browsers, as one mechanism.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls3/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 13,
+      "id": "vulnerabilities",
+      "ref": "CC7.1, CC6.8",
+      "category": "security",
+      "title": "Finding vulnerabilities",
+      "asks": "The organization detects new vulnerabilities and unauthorized or malicious software.",
+      "how": "Nothing scans for them. No automated dependency updates or vulnerability scans are configured, and the install step in CI skips npm's own audit.",
+      "design": "gap",
+      "operating": "gap",
+      "gap": "A dependency scanner on every pull request, and a record of what was found and fixed.",
+      "solo": "",
+      "evidence": [
+        ".github/workflows/ci.yml#--no-audit"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "ID.RA-01",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Vulnerabilities in assets are identified, validated, and recorded",
+            "title_only": false,
+            "why": "Detecting new vulnerabilities in assets is identifying, validating and recording them.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.PS-02",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Software is maintained, replaced, and removed commensurate with risk",
+            "title_only": false,
+            "why": "Dependency updates are software maintained commensurate with risk, the remediation side of the criterion.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "7.1",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Establish and Maintain a Vulnerability Management Process",
+            "title_only": true,
+            "why": "Detecting and handling new vulnerabilities is the vulnerability management process this safeguard asks for.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls7/"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "7.5",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Perform Automated Vulnerability Scans of Internal Enterprise Assets",
+            "title_only": true,
+            "why": "Automated scans are the mechanism the criterion names; this safeguard is written for internal assets and a hosted web application is an adaptation.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls7/"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "16.5",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Use Up-to-Date and Trusted Third-Party Software Components",
+            "title_only": true,
+            "why": "Dependency updates are use of up-to-date and trusted third-party software components.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls16/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 14,
+      "id": "detection",
+      "ref": "CC7.2",
+      "category": "security",
+      "title": "Noticing when something breaks",
+      "asks": "The system is monitored for anomalies that could mean an attack, an error or an outage.",
+      "how": "Errors go through one reporting function. A watcher compares the live deployment with the latest commit and alerts when production stalls, and it runs off the hosting provider so it still fires during that provider's outage.",
+      "design": "ready",
+      "operating": "partial",
+      "gap": "Both watchers run on schedule, but the health check looks every three hours and the deploy watcher twice a day, so an outage can go unheard for hours. Every alert reaches one person, and nobody else is watching when that person is away.",
+      "solo": "",
+      "evidence": [
+        "src/lib/observability.js#reportError",
+        "src/lib/deploys/classify.mjs#classifyDeploy",
+        ".github/workflows/deploy-watch.yml#23 5,17 * * *"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "DE.CM-09",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events",
+            "title_only": false,
+            "why": "Error reporting and a watcher comparing the live deployment with the latest commit monitor software and runtime for adverse events.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "DE.AE-06",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Information on adverse events is provided to authorized staff and tools",
+            "title_only": false,
+            "why": "Alerts that reach the operator are information on adverse events provided to authorized staff.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "13.1",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Centralize Security Event Alerting",
+            "title_only": true,
+            "why": "Alerts routed to one operator are security event alerting centralized, at the scale of one person.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls13/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 15,
+      "id": "incidents",
+      "ref": "CC7.3, CC7.4, CC7.5",
+      "category": "security",
+      "title": "Responding to incidents",
+      "asks": "Incidents are evaluated and contained, then fixed, and the lessons are written down.",
+      "how": "A failed check opens an incident, which moves through one state machine until it is resolved, and alerts page the operator by Telegram.",
+      "design": "partial",
+      "operating": "partial",
+      "gap": "There is no written response plan and no postmortem convention. The security doc names the missing convention as a gap.",
+      "solo": "",
+      "evidence": [
+        "src/lib/agents/incidents-machine.mjs#decideIncidentTransition",
+        "docs/capabilities/08-security-privacy-resilience.md#no convention exists yet"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "DE.AE-08",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Incidents are declared when adverse events meet the defined incident criteria",
+            "title_only": false,
+            "why": "A failed check that opens an incident is declaring an incident when an adverse event meets defined criteria.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "RS.MA-01",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "The incident response plan is executed in coordination with relevant third parties once an incident is declared",
+            "title_only": false,
+            "why": "A state machine that carries an incident to resolution is executing an incident response plan, without third-party coordination.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "RS.AN-03",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Analysis is performed to establish what has taken place during an incident and the root cause of the incident",
+            "title_only": false,
+            "why": "Writing down the lessons from an incident includes establishing what happened and the root cause.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "17.4",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Establish and Maintain an Incident Response Process",
+            "title_only": true,
+            "why": "A single state machine from detection to resolution is an incident response process, though the criterion adds containment and lessons.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls17/"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "17.8",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Conduct Post-Incident Reviews",
+            "title_only": true,
+            "why": "The criterion's final step, writing down the lessons, is the post-incident review this safeguard asks for.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls17/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 16,
+      "id": "change",
+      "ref": "CC8.1",
+      "category": "security",
+      "title": "Every change tested and approved",
+      "asks": "Changes to the system are authorized and designed, then tested and approved, with a record kept, before they reach production.",
+      "how": "Every change lands through a pull request that must pass lint, the full test suite and a build that matches production. One narrow path merges small agent-written fixes without a person, and it fails closed.",
+      "design": "partial",
+      "operating": "partial",
+      "gap": "Nobody but the author approves a change. The one automated reviewer was switched off when its API budget went to zero.",
+      "solo": "Separation of duties needs a second person: whoever writes a change should not be the one who approves it.",
+      "evidence": [
+        ".github/workflows/ci.yml#Lint, Test & Build",
+        ".github/workflows/prod-parity.yml#build:prod-parity",
+        ".github/workflows/pr-qa-review.yml#PAUSED",
+        ".github/workflows/pm-automerge.yml#Fail-closed everywhere"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "ID.RA-07",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Changes and exceptions are managed, assessed for risk impact, recorded, and tracked",
+            "title_only": false,
+            "why": "Changes authorized, tested, approved and recorded before production are changes managed, assessed for risk and tracked.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.PS-01",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Configuration management practices are established and applied",
+            "title_only": false,
+            "why": "A pull request gated by lint, tests and a production-matching build is part of how configuration is managed and applied.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.PS-06",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Secure software development practices are integrated, and their performance is monitored throughout the software development life cycle",
+            "title_only": false,
+            "why": "Required lint, test and build checks on every change are secure development practices integrated into the life cycle.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "16.1",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Establish and Maintain a Secure Application Development Process",
+            "title_only": true,
+            "why": "A required pull request path with checks is a secure application development process, though v8 has no change management safeguard as such.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls16/"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "16.12",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Implement Code-Level Security Checks",
+            "title_only": true,
+            "why": "Lint and the full test suite on every change are code-level checks.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls16/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 17,
+      "id": "vendors",
+      "ref": "CC9.2",
+      "category": "security",
+      "title": "Vendor risk",
+      "asks": "Risks from vendors and business partners are assessed and managed.",
+      "how": "The credential ledger names every outside service the site holds a key for, so the vendor list is complete and a test keeps it that way.",
+      "design": "partial",
+      "operating": "gap",
+      "gap": "Nobody collects the vendors' own SOC 2 reports or writes down a review of them.",
+      "solo": "",
+      "evidence": [
+        "src/lib/secrets/inventory.mjs#TOKEN_SOURCES"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "ID.AM-04",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Inventories of services provided by suppliers are maintained",
+            "title_only": false,
+            "why": "A ledger of every outside service the site holds a key for is an inventory of services provided by suppliers.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "GV.SC-07",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "The risks posed by a supplier, their products and services, and other third parties are understood, recorded, prioritized, assessed, responded to, and monitored over the course of the relationship",
+            "title_only": false,
+            "why": "Recording every vendor is the first step of understanding and monitoring the risk each poses, which the ledger alone does not do.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "15.1",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Establish and Maintain an Inventory of Service Providers",
+            "title_only": true,
+            "why": "A complete, test-held vendor list is an inventory of service providers.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls15/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 18,
+      "id": "backups",
+      "ref": "A1.2, A1.3",
+      "category": "availability",
+      "title": "Backups that restore",
+      "asks": "Data is backed up, and recovery is tested.",
+      "how": "A weekly job dumps the business-critical tables, encrypts the archive, copies it offsite, then restores it into a scratch database and checks the rows, because a backup that cannot restore is not a backup. A runbook sets recovery targets for each zone. Portfolio OS, the business record, has its own nightly encrypted export and restore test, and records each result.",
+      "design": "ready",
+      "operating": "partial",
+      "gap": "The job was paused from July 29 to October 8, 2026. Since the schedule came back, every weekly restore test has passed, six in a row from October 11 to November 15. A Type II period is usually three months or more, so the record is real but still short.",
+      "solo": "",
+      "evidence": [
+        ".github/workflows/backup-verify.yml#restore smoke test",
+        "scripts/ops/lib/archive-crypto.mjs#encryptArchive",
+        "docs/ops/BACKUP-DR.md#RPO / RTO by zone",
+        "src/lib/os/backup/restore.mjs#compareRestore",
+        ".github/workflows/os-backup.yml#Restore test into the scratch database"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.DS-11",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Backups of data are created, protected, maintained, and tested",
+            "title_only": false,
+            "why": "Weekly encrypted, offsite, restore-tested backups are backups created, protected, maintained and tested.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "RC.RP-03",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "The integrity of backups and other restoration assets is verified before using them for restoration",
+            "title_only": false,
+            "why": "Restoring into a scratch database and checking the rows verifies backup integrity before real use.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "11.2",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Perform Automated Backups",
+            "title_only": true,
+            "why": "A scheduled weekly dump of the critical tables is automated backups.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls11/"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "11.3",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Protect Recovery Data",
+            "title_only": true,
+            "why": "Encrypting the archive and copying it offsite is protecting recovery data.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls11/"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "11.5",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Test Data Recovery",
+            "title_only": true,
+            "why": "Restoring into a scratch database and checking the rows is testing data recovery.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls11/"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "11.1",
+            "relationship": "partial",
+            "confidence": "high",
+            "outcome": "Establish and Maintain a Data Recovery Process",
+            "title_only": true,
+            "why": "A runbook with recovery targets for each zone is a data recovery process.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls11/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 19,
+      "id": "capacity",
+      "ref": "A1.1",
+      "category": "availability",
+      "title": "Capacity and cost limits",
+      "asks": "Capacity is managed so the system can meet its commitments.",
+      "how": "AI spend is logged on every call, and a brake stops paid calls at the monthly ceiling before a runaway bill can take the service down. Public endpoints are rate-limited.",
+      "design": "ready",
+      "operating": "ready",
+      "gap": "",
+      "solo": "",
+      "evidence": [
+        "src/lib/ai-spend/brake.mjs#enforceSpendBrake",
+        "src/lib/ai-spend/events.mjs#logAiUsage"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.IR-04",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Adequate resource capacity to ensure availability is maintained",
+            "title_only": false,
+            "why": "Rate limits and a spend brake keep demand within what the service can carry, though the subcategory is about capacity itself.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          }
+        ],
+        "unmapped": [
+          {
+            "framework": "cis-v8",
+            "reason": "CIS Controls v8 has no safeguard on capacity planning or cost limits; its availability coverage is backup and recovery (Control 11)."
+          }
+        ]
+      }
+    },
+    {
+      "n": 20,
+      "id": "confidential",
+      "ref": "C1.1",
+      "category": "confidentiality",
+      "title": "Confidential records walled off",
+      "asks": "Confidential information is identified and protected.",
+      "how": "A client's records can be imported only by that client's own module. A test scans the codebase and fails if anything else reaches in, and it also fails if it scanned too few files to mean anything.",
+      "design": "ready",
+      "operating": "ready",
+      "gap": "",
+      "solo": "",
+      "evidence": [
+        "src/app/__tests__/pii-boundary.test.js#PII boundary"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.AA-05",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Access permissions, entitlements, and authorizations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties",
+            "title_only": false,
+            "why": "Letting only a client's own module import that client's records enforces access by role on the most sensitive data.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "nist-csf-2",
+            "ref": "ID.AM-07",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Inventories of data and corresponding metadata for designated data types are maintained",
+            "title_only": false,
+            "why": "Naming which records are confidential and walling them off starts an inventory of designated data types, without the metadata.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "3.3",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Configure Data Access Control Lists",
+            "title_only": true,
+            "why": "A code-level wall around a client's records is an access control list on that data, enforced by test rather than by a file system.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls3/"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "3.12",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Segment Data Processing and Storage Based on Sensitivity",
+            "title_only": true,
+            "why": "A test-held wall that isolates one client's records from the rest is segmenting data handling by sensitivity.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls3/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 21,
+      "id": "disposal",
+      "ref": "C1.2",
+      "category": "confidentiality",
+      "title": "Disposal on a schedule",
+      "asks": "Confidential information is disposed of when it is no longer needed.",
+      "how": "A written retention policy deletes dinner-guest replies 30 days after the event and retires stale scraped listings, and unclaimed anonymous boards are deleted after 30 days.",
+      "design": "partial",
+      "operating": "partial",
+      "gap": "The mail inbox declares a retention period it does not enforce. The deletion sweeps run again as of October 8, 2026 after a pause since July 29.",
+      "solo": "",
+      "evidence": [
+        "src/lib/retention/policy.mjs#DEFAULT_RSVP_RETENTION_DAYS",
+        "docs/capabilities/08-security-privacy-resilience.md#NOT enforced",
+        ".github/workflows/retention-sweep.yml#Retention sweep"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "ID.AM-08",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Systems, hardware, software, services, and data are managed throughout their life cycles",
+            "title_only": false,
+            "why": "Deleting records after a retention period is managing data through to the end of its life cycle.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "3.4",
+            "relationship": "full",
+            "confidence": "high",
+            "outcome": "Enforce Data Retention",
+            "title_only": true,
+            "why": "A written retention policy with scheduled deletes is data retention enforced.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls3/"
+          },
+          {
+            "framework": "cis-v8",
+            "ref": "3.5",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Securely Dispose of Data",
+            "title_only": true,
+            "why": "Deleting records after a period is disposal, though the safeguard also covers how thoroughly data is destroyed.",
+            "source_url": "https://cas8.docs.cisecurity.org/en/latest/source/Controls3/"
+          }
+        ],
+        "unmapped": []
+      }
+    },
+    {
+      "n": 22,
+      "id": "accuracy",
+      "ref": "PI1.2, PI1.3",
+      "category": "integrity",
+      "title": "Accurate processing",
+      "asks": "Inputs and processing are complete and accurate.",
+      "how": "Money is stored as whole cents, never as floating-point dollars. Published figures are recomputed on every change. Payment webhooks are accepted only with a valid signature.",
+      "design": "ready",
+      "operating": "ready",
+      "gap": "",
+      "solo": "",
+      "evidence": [
+        "src/lib/money/transactions.js#to integer cents",
+        "src/lib/research/__tests__/claims.test.js#recompute true",
+        "src/lib/billing/stripe.mjs#constructWebhookEvent"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "PR.AA-04",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Identity assertions are protected, conveyed, and verified",
+            "title_only": false,
+            "why": "Accepting payment webhooks only with a valid signature is verifying identity assertions, one input-integrity check among the criterion's several.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          }
+        ],
+        "unmapped": [
+          {
+            "framework": "cis-v8",
+            "reason": "Processing integrity (whole-cent money, recomputed figures) is an application correctness concern; CIS v8 has no safeguard on it, and 16.12 code-level checks was considered and rejected as too loose a fit."
+          }
+        ]
+      }
+    },
+    {
+      "n": 23,
+      "id": "notice",
+      "ref": "P1.1, P2.1",
+      "category": "privacy",
+      "title": "Notice and choice",
+      "asks": "People are told what personal information is collected and are given choices about it.",
+      "how": "A privacy page lists every cookie the site sets. The one optional analytics cookie stays off unless the visitor accepts it.",
+      "design": "partial",
+      "operating": "partial",
+      "gap": "The notice covers the browser. It does not describe the personal information held in the private household and client tools.",
+      "solo": "",
+      "evidence": [
+        "src/app/privacy/page.jsx#Essential only"
+      ],
+      "crosswalk": {
+        "mappings": [
+          {
+            "framework": "nist-csf-2",
+            "ref": "GV.OC-03",
+            "relationship": "partial",
+            "confidence": "medium",
+            "outcome": "Legal, regulatory, and contractual requirements regarding cybersecurity - including privacy and civil liberties obligations - are understood and managed",
+            "title_only": false,
+            "why": "A privacy notice and an opt-in analytics cookie respond to privacy obligations; the subcategory is about understanding and managing those obligations.",
+            "source_url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+          }
+        ],
+        "unmapped": [
+          {
+            "framework": "cis-v8",
+            "reason": "CIS Controls v8 is a security framework with no safeguard on privacy notices or consent; its data safeguards (Control 3) concern protection and handling."
+          }
+        ]
+      }
+    }
+  ]
+}

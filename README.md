@@ -1,6 +1,6 @@
 # SOC 2 Readiness for a One-Person Platform
 
-What one operator can prove, what one operator cannot, and why a control that was built but not kept running is the difference between a Type I and a Type II. The public mirror of the research piece at [jakelawrence.xyz/research/soc2-readiness](https://jakelawrence.xyz/research/soc2-readiness): a SOC 2 readiness self-assessment of a one-person platform against the AICPA Trust Services Criteria. Version 1.1.3 is the newest, published 2026-11-21.
+What one operator can prove, what one operator cannot, and why a control that was built but not kept running is the difference between a Type I and a Type II. The public mirror of the research piece at [jakelawrence.xyz/research/soc2-readiness](https://jakelawrence.xyz/research/soc2-readiness): a SOC 2 readiness self-assessment of a one-person platform against the AICPA Trust Services Criteria. Version 1.1.4 is the newest, published 2026-11-21.
 
 > **Not an audit.** This is a self-assessment, not an audit. Only an independent CPA firm can issue a SOC 2 report, and this platform has not engaged one. Nothing on this page claims compliance.
 
@@ -9,7 +9,7 @@ Every file here is a frozen release, exactly as the site publishes it, with its 
 | | |
 |---|---|
 | The live page | https://jakelawrence.xyz/research/soc2-readiness |
-| The newest release's files | https://jakelawrence.xyz/downloads/soc2-readiness/v1.1.3/ |
+| The newest release's files | https://jakelawrence.xyz/downloads/soc2-readiness/v1.1.4/ |
 | One permanent link per version | `https://jakelawrence.xyz/research/soc2-readiness/v/<version>` |
 | License | CC BY 4.0 ([LICENSE.md](LICENSE.md)) |
 | Cite | [CITATION.cff](CITATION.cff) (GitHub's "Cite this repository" reads it) |
@@ -30,6 +30,7 @@ Each folder under `downloads/soc2-readiness/` is one frozen version, and `latest
 
 | Version | Published | Contents | Frozen page |
 |---|---|---|---|
+| [1.1.4](downloads/soc2-readiness/v1.1.4) | 2026-11-21 | 23 controls, 8 slip a grade | [https://jakelawrence.xyz/research/soc2-readiness/v/1.1.4](https://jakelawrence.xyz/research/soc2-readiness/v/1.1.4) |
 | [1.1.3](downloads/soc2-readiness/v1.1.3) | 2026-11-21 | 23 controls, 8 slip a grade | [https://jakelawrence.xyz/research/soc2-readiness/v/1.1.3](https://jakelawrence.xyz/research/soc2-readiness/v/1.1.3) |
 | [1.1.2](downloads/soc2-readiness/v1.1.2) | 2026-11-20 | 23 controls, 8 slip a grade | [https://jakelawrence.xyz/research/soc2-readiness/v/1.1.2](https://jakelawrence.xyz/research/soc2-readiness/v/1.1.2) |
 
@@ -48,22 +49,24 @@ checks every file of every version against its `SHA256SUMS` and `manifest.json`,
 Archived on Zenodo with a DOI:
 
 - **All versions** (always the newest): [https://doi.org/10.5281/zenodo.24427334](https://doi.org/10.5281/zenodo.24427334)
+- **1.1.4:** [https://doi.org/10.5281/zenodo.24430880](https://doi.org/10.5281/zenodo.24430880)
 - **1.1.3:** [https://doi.org/10.5281/zenodo.24427335](https://doi.org/10.5281/zenodo.24427335)
 
 Cite the version you used by its own DOI.
 
-Version 1.1.3, as the release gives it:
+Version 1.1.4, as the release gives it:
 
 ```
-Lawrence, J. (2026). SOC 2 Readiness for a One-Person Platform (version 1.1.3) [Data set]. https://jakelawrence.xyz/research/soc2-readiness. CC BY 4.0.
+Lawrence, J. (2026). SOC 2 Readiness for a One-Person Platform (version 1.1.4) [Data set]. https://jakelawrence.xyz/research/soc2-readiness. CC BY 4.0.
 ```
 
-[CITATION.cff](CITATION.cff) is the same in machine-readable form, for version 1.1.3. Each version's own `CITATION.cff` is in its folder. The release files carry `doi: null` by design, since a version is frozen before its DOI can exist; the DOI is recorded in the site's Zenodo registry and in this README and `CITATION.cff`.
+[CITATION.cff](CITATION.cff) is the same in machine-readable form, for version 1.1.4. Each version's own `CITATION.cff` is in its folder. The release files carry `doi: null` by design, since a version is frozen before its DOI can exist; the DOI is recorded in the site's Zenodo registry and in this README and `CITATION.cff`.
 
 ## What changed, version by version
 
-From the 1.1.3 release's own README:
+From the 1.1.4 release's own README:
 
+- 1.1.4 (2026-11-21): Four evidence citations named a word found in nearly every file of their kind, so they proved only that the file existed. Each now names something specific, and a test refuses such words from here on. The next-steps list no longer says the access and vendor reviews were done once: neither has a dated record. All 23 controls keep their grades, last read on November 20, which stays the as-of date.
 - 1.1.3 (2026-11-21): Adds a crosswalk: each of the 23 controls names where it falls in the NIST Cybersecurity Framework 2.0, quoting NIST's outcome text, and in the CIS Critical Security Controls v8 by safeguard title, with full or partial fit, a confidence and the reason. Controls with no honest fit say why. Grades are unchanged and were last read on November 20, which stays the as-of date.
 - 1.1.2 (2026-11-20): All 23 controls re-read against the run history, grades unchanged. Detection: the gap said the health check had stopped, which stopped being true on October 8; the gap now names what still keeps it partial (how long an outage can go unheard, and one person on the receiving end). Backups: six weekly restore tests have passed since the schedule came back (October 11 to November 15), so the gap now counts them instead of saying there are none. The page no longer says a test fails at the review date; that test was retired on October 16.
 - 1.1.1 (2026-10-31): All 23 controls re-read, grades unchanged. Health check cadence: the agent tick that runs the site-health sweep moved from hourly to every three hours (an Actions spend cut), so the status page now reads a check up to three hours old; the evidence line follows the workflow.
