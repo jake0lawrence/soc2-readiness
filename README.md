@@ -62,6 +62,10 @@ Lawrence, J. (2026). SOC 2 Readiness for a One-Person Platform (version 1.1.4) [
 
 [CITATION.cff](CITATION.cff) is the same in machine-readable form, for version 1.1.4. Each version's own `CITATION.cff` is in its folder. The release files carry `doi: null` by design, since a version is frozen before its DOI can exist; the DOI is recorded in the site's Zenodo registry and in this README and `CITATION.cff`.
 
+## Methods paper
+
+[Policy as Code, Graded Twice](https://doi.org/10.5281/zenodo.24430329) (DOI 10.5281/zenodo.24430329, which always resolves to the newest version). A methods preprint on keeping a published policy and a control self-assessment true to the system they describe, and on what the checks caught and missed when replayed against the publisher's own history. It read version 1.1.3 of this piece.
+
 ## What changed, version by version
 
 From the 1.1.4 release's own README:
